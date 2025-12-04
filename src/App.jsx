@@ -14,7 +14,7 @@ function App() {
 
     return (
         <>
-            <h1>Frontend + Backend</h1>
+            <h1>Frontend (JSX) + Backend</h1>
             <div className="card">
                 <p>
                     Backend says: {message || 'Loading... (Ensure backend is running)'}
