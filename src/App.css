@@ -20,10 +20,10 @@
 }
 
 .logo {
-  font-size: 22px;
+  font-size: 20px;   /* 혹은 22px 등 네가 쓰는 값 */
   font-weight: 700;
+  cursor: pointer;   /* 🔥 이 줄 추가 */
 }
-
 
 .layout {
   flex: 1;
@@ -164,8 +164,10 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  margin-right: 32px;
+  margin-right: 40px;
+  cursor: pointer; /* 🔥 클릭 가능한 느낌 */
 }
+
 
 
 .profile-icon {
@@ -206,4 +208,186 @@
   font-size: 13px;
   font-weight: 600;
   color: #111827;
+}
+
+/* ===================== 프로필 페이지 ===================== */
+
+.profile-page {
+  background-color: #f5f5f7; /* 홈페이지랑 같은 배경 톤 */
+  min-height: calc(100vh - 72px); /* 헤더 높이 제외 */
+  padding: 32px 0;
+}
+
+.profile-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  padding: 0 32px;
+}
+
+/* 왼쪽 사이드 영역 */
+.profile-sidebar {
+  width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 왼쪽 큰 프로필 카드 */
+.profile-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(17, 24, 39, 0.04);
+}
+
+.profile-photo-large {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  margin-bottom: 6px;
+}
+
+.profile-text-line {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+/* 왼쪽 메뉴 (activity / security) */
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-menu-item {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.profile-menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+.profile-menu-item.active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* 오른쪽 내용 영역 */
+.profile-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 공통 카드 */
+.profile-section {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 24px;
+  box-shadow: 0 4px 8px rgba(17, 24, 39, 0.04);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.section-title.danger {
+  color: #ef4444;
+}
+
+.section-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-row.between {
+  justify-content: space-between;
+}
+
+.section-label {
+  font-size: 15px;
+  color: #374151;
+  min-width: 80px;
+}
+
+.section-input {
+  flex: 1;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.section-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+}
+
+.section-desc {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* 버튼 공통 */
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.activity-item {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.activity-date {
+  width: 90px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.activity-text {
+  flex: 1;
 }
