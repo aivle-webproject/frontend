@@ -1,0 +1,226 @@
+/* 전체 페이지 컨테이너: 가운데 정렬 + 간격 */
+.profile-page {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 상단 헤더 */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.profile-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* 메인 2컬럼 레이아웃 */
+.profile-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* 왼쪽 컬럼 */
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 프로필 카드 */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.06);
+}
+
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9fafb;
+  font-size: 32px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.profile-email,
+.profile-date {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* 독서 요약 카드 */
+.profile-detail-box {
+  padding: 18px 22px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.05);
+}
+
+.profile-detail-box h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.summary-grid {
+  display: flex;
+  gap: 32px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.summary-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.summary-label {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* 오른쪽 컬럼 */
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 공통 카드 스타일 */
+.profile-section {
+  padding: 18px 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.05);
+}
+
+.profile-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+/* 비어 있는 설명 텍스트 */
+.empty-text {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* 관심 카테고리 칩 */
+.category-chips {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* 기능 버튼들 */
+.setting-btn {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.setting-btn:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+/* 위험 영역 */
+.danger-zone {
+  margin-top: 4px;
+  border-color: #fecaca !important;
+  background-color: #fef2f2;
+}
+
+.danger-title {
+  color: #b91c1c;
+}
+
+.danger-btn {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 8px;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  color: #b91c1c;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.danger-btn:hover {
+  background: #fecaca;
+  border-color: #f97373;
+}
+
+/* 반응형: 폭 줄어들면 한 컬럼으로 */
+@media (max-width: 1024px) {
+  .profile-main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
