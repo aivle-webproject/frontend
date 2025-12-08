@@ -2,8 +2,14 @@
     display: flex;
     gap: 40px;
     padding: 40px;
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
+}
+
+.book-detail-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .book-detail-cover {
@@ -27,10 +33,24 @@
     background: linear-gradient(135deg, #e5e7eb, #f9fafb);
 }
 
+.book-detail-dates {
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.book-detail-dates p {
+    margin: 4px 0;
+}
+
 .book-detail-info {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    flex: 1;
 }
 
 .book-detail-title {
@@ -56,5 +76,57 @@
     line-height: 1.8;
     color: #374151;
     margin-top: 8px;
+}
+
+.book-detail-actions {
+    flex-shrink: 0;
+}
+
+.edit-book-btn {
+    padding: 12px 24px;
+    background-color: #ffffff;
+    border: 2px solid #1f2937;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-book-btn:hover {
+    background-color: #1f2937;
+    color: #ffffff;
+}
+
+/* 수정 모달 스타일 */
+.edit-book-modal {
+    width: 420px;
+}
+
+.modal-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #4b5563;
+    margin-bottom: 6px;
+    margin-top: 4px;
+}
+
+.edit-book-modal textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.edit-book-modal textarea:focus {
+    outline: none;
+    border-color: #2f66ed;
 }
 
