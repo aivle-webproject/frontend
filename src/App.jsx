@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import BookRegister from "./pages/BookRegister";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import BookDetail from "./components/BookDetail";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/book-register" element={<BookRegister />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/:bookId" element={<BookDetail />} />
                 </Routes>
             </Layout>
         </BrowserRouter>
