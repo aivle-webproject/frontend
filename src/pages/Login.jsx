@@ -13,16 +13,19 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
+import { useAuth } from "../context/AuthContext";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: 로그인 API 연동 (userId, password 사용)
-    navigate("/books");
+    login({ id: userId, name: userId });
+    navigate("/");
   };
 
   return (
