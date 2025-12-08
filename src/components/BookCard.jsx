@@ -1,12 +1,19 @@
 import "./BookCard.css";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function BookCard({ title, cover }) {
+function BookCard({ id, title, coverImageUrl }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/${id}`);
+  };
+
   return (
-    <div className="book-card">
+    <div className="book-card" onClick={handleClick} style={{ cursor: "pointer" }}>
       <div className="book-cover-wrapper">
-        {cover ? (
-          <img src={cover} alt={title} className="book-cover" />
+        {coverImageUrl ? (
+          <img src={coverImageUrl} alt={title} className="book-cover" />
         ) : (
           <div className="book-cover placeholder" />
         )}
