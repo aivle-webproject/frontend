@@ -9,6 +9,8 @@ const CATEGORIES = [
     { icon: "🔍", label: "추리" },
     { icon: "🏺", label: "역사" },
     { icon: "✒️", label: "시" },
+    { icon: "🏛️", label: "고전" },
+    { icon: "🧚", label: "동화" },
 ];
 
 function Sidebar() {
