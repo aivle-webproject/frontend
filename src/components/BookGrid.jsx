@@ -1,4 +1,4 @@
-// src/components/BookGrid.jsx
+import "./BookGrid.css";
 import React from "react";
 import BookCard from "./BookCard";
 

@@ -1,4 +1,4 @@
-// src/components/BookCard.jsx
+import "./BookCard.css";
 import React from "react";
 
 function BookCard({ title, cover }) {
