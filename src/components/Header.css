@@ -1,0 +1,96 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 72px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    color: #374151;
+}
+
+.profile-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-area button {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.signup-btn {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+}
+
+.login-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.signup-btn:hover {
+    background-color: #1d4ed8;
+}
+
+/* 로그인 후 */
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.profile-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.logout-btn {
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+
+    background-color: #ffffff;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.add-book-btn {
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+
+    background-color: #2f66ed;
+    color: white;
+    border: none;
+}
+
+.add-book-btn:hover {
+    background-color: #2552c8;
+}
