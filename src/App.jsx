@@ -8,9 +8,12 @@ import Signup from "./pages/Signup";
 import BookDetail from "./components/BookDetail";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileEdit from "./pages/ProfileEdit";
+// 나중에 AuthProvider 쓸 거면 이 줄 살려두고, 아니면 지워도 됨
+// import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
+    // <AuthProvider>
     <BrowserRouter>
       <Layout>
         <Routes>
@@ -24,6 +27,7 @@ function App() {
         </Routes>
       </Layout>
     </BrowserRouter>
+    // </AuthProvider>
   );
 }
 
