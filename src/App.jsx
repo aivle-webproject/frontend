@@ -1,5 +1,5 @@
 // src/App.jsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import Home from "./pages/Home";
@@ -22,30 +22,29 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          {/* 홈: 책 리스트 전달 */}
-          <Route path="/" element={<Home books={books} />} />
+    <Layout>
+      <Routes>
+        {/* 홈: 책 리스트 전달 */}
+        <Route path="/" element={<Home books={books} />} />
 
-          {/* 도서 등록: addBook 함수 전달 */}
-          <Route
-            path="/book-register"
-            element={<BookRegister addBook={addBook} />}
-          />
+        {/* 도서 등록: addBook 함수 전달 */}
+        <Route
+          path="/book-register"
+          element={<BookRegister addBook={addBook} />}
+        />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-          {/* 프로필 페이지 (현재 작업한 UI) */}
-          <Route path="/profile" element={<ProfilePage />} />
+        {/* 프로필 페이지 (현재 작업한 UI) */}
+        <Route path="/profile" element={<ProfilePage />} />
 
-          {/* 도서 상세 */}
-          <Route path="/:bookId" element={<BookDetail />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+        {/* 도서 상세 */}
+        <Route path="/:bookId" element={<BookDetail />} />
+      </Routes>
+    </Layout>
   );
 }
 
 export default App;
+
