@@ -2,41 +2,81 @@
 import React from "react";
 import "./Header.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
+import { Link } from "react-router-dom";
 
 function Header() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { user, logout } = useAuth();
+    const isLoggedIn = !!user;
 
-  const goHome = () => navigate("/");
-  const goBookRegister = () => navigate("/book-register");
-  const goLogin = () => navigate("/login");
-  const goSignup = () => navigate("/signup");
-  const goProfile = () => navigate("/profile");
+    return (
+        <header className="header">
+            {/* 왼쪽 로고 */}
+            <div className="logo-area">
+                <Link to="/" className="logo-link">
+                    <h1 className="logo-text">걷다가 서재</h1>
+                </Link>
+            </div>
 
-  return (
-    <header className="header">
-      <div className="header-left" onClick={goHome}>
-        <h1 className="logo">걷다가 서재</h1>
-      </div>
+            {/* 오른쪽 버튼 영역 */}
+            <div className="profile-area">
+                {isLoggedIn ? (
+                    <>
+                        {/* 사용자 정보 */}
+                        <div className="profile-info">
+                            <div className="profile-icon">👤</div>
+                            <span className="profile-name">{user.name} 님</span>
+                        </div>
 
-      <div className="header-right">
-        <button className="header-btn" onClick={goBookRegister}>
-          도서 등록
-        </button>
+                        {/* 프로필 */}
+                        <button
+                            className="add-book-btn"
+                            onClick={() => navigate("/profile")}
+                        >
+                            프로필
+                        </button>
 
-        {/* TODO: 나중에 로그인 여부에 따라 프로필 버튼 노출 제어 */}
-        <button className="header-btn" onClick={goProfile}>
-          프로필
-        </button>
+                        {/* 도서 등록 */}
+                        <button
+                            className="add-book-btn"
+                            onClick={() => navigate("/book-register")}
+                        >
+                            도서 등록
+                        </button>
 
-        <button className="header-btn login-btn" onClick={goLogin}>
-          로그인
-        </button>
-        <button className="header-btn signup-btn" onClick={goSignup}>
-          회원가입
-        </button>
-      </div>
-    </header>
-  );
+
+
+                        {/* 로그아웃 */}
+                        <button
+                            className="logout-btn"
+                            onClick={logout}
+                        >
+                            로그아웃
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        {/* 로그인 */}
+                        <button
+                            className="header-btn login-btn"
+                            onClick={() => navigate("/login")}
+                        >
+                            로그인
+                        </button>
+
+                        {/* 회원가입 */}
+                        <button
+                            className="header-btn signup-btn"
+                            onClick={() => navigate("/signup")}
+                        >
+                            회원가입
+                        </button>
+                    </>
+                )}
+            </div>
+        </header>
+    );
 }
 
 export default Header;
