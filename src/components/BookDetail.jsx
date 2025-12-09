@@ -10,7 +10,8 @@ function EditBookModal({ book, onClose, onSave }) {
     const [content, setContent] = useState(book.content);
 
     const handleSave = () => {
-        onSave({ ...book, title, category, content });
+        const updatedBook = { ...book, title, category, content };
+        onSave(updatedBook);
         onClose();
     };
 
@@ -25,13 +26,22 @@ function EditBookModal({ book, onClose, onSave }) {
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="제목"
                 />
+
                 <label className="modal-label">카테고리</label>
-                <input
-                    type="text"
+                <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    placeholder="카테고리"
-                />
+                >
+                    <option value="로맨스">로맨스</option>
+                    <option value="SF">SF</option>
+                    <option value="공포">공포</option>
+                    <option value="추리">추리</option>
+                    <option value="역사">역사</option>
+                    <option value="시">시</option>
+                    <option value="고전">고전</option>
+                    <option value="동화">동화</option>
+                </select>
+
                 <label className="modal-label">내용</label>
                 <textarea
                     value={content}
@@ -50,7 +60,11 @@ function EditBookModal({ book, onClose, onSave }) {
 
 function BookDetail() {
     const { bookId } = useParams();
-    const book = BOOKS.find((b) => b.id === Number(bookId));
+    const [book, setBook] = useState(() => {
+        const found = BOOKS.find((b) => String(b.id) === String(bookId));
+        return found || null;
+    });
+
     const [showEditModal, setShowEditModal] = useState(false);
 
     if (!book) {
@@ -63,7 +77,10 @@ function BookDetail() {
 
     const handleSave = (updatedBook) => {
         // TODO: 실제 API 연동 시 여기서 저장 처리
-        console.log("저장된 도서:", updatedBook);
+        setBook(updatedBook);
+    
+    // 나중에 실제 API 붙일 때는 여기에서 fetch/axios로 업데이트 호출하면 됨
+    // e.g. await api.updateBook(updatedBook);
     };
 
     return (
@@ -81,7 +98,8 @@ function BookDetail() {
                     <p>수정날짜: {book.editedAt}</p>
                 </div>
             </div>
-            <div className="book-detail-info">
+
+            <div className="book-detail-right">
                 <h1 className="book-detail-title">{book.title}</h1>
                 <span className="book-detail-category">{book.category}</span>
                 <p className="book-detail-content">{book.content}</p>

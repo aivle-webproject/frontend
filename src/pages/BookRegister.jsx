@@ -46,6 +46,8 @@ function BookRegister() {
                     <option>추리</option>
                     <option>역사</option>
                     <option>시</option>
+                    <option>고전</option>
+                    <option>동화</option>
                 </select>
             </div>
 
