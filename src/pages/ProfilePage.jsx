@@ -1,90 +1,119 @@
 // src/pages/ProfilePage.jsx
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 import "../App.css";
 import "./ProfilePage.css";
+import {useNavigate} from "react-router-dom";
 
 function ProfilePage() {
-  return (
-    <div className="layout">
-      <Sidebar />
+    const { user, logout } = useAuth();
+    const userId = user.id;
+    const navigate = useNavigate();
 
-      <main className="content">
-        <div className="profile-page">
-          {/* 상단 헤더 - 왼쪽 상단 고정 */}
-          <header className="profile-header">
-            <h1 className="profile-title">내 프로필</h1>
-            <p className="profile-subtitle">
-              나의 독서 정보와 계정 상태를 확인하세요.
-            </p>
-          </header>
+    const [newPassword, setNewPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
-          {/* 카드들을 세로로 한 줄 정렬 */}
-          <section className="profile-column">
-            {/* 1. 프로필 카드 */}
-            <div className="profile-card">
-              <div className="profile-avatar">
-                <span>Y</span>
-              </div>
 
-              <div className="profile-info">
-                <h2 className="profile-name">임주혁</h2>
-                {/* 이메일은 프로필 카드에서 제거 */}
-                <p className="profile-date">가입일: 2025-01-01</p>
-              </div>
-            </div>
+    /* ✅ 비밀번호 변경 */
+    const handleChangePassword = async () => {
+        if (!newPassword) return alert("비밀번호 입력");
 
-            {/* 2. 독서 요약 카드 */}
-            <div className="profile-detail-box">
-              <h3 className="detail-title">독서 요약</h3>
+        try {
+            await axios.patch(`http://localhost:8080/profile/${userId}/password`, {
+                newPassword
+                }
+            );
 
-              <div className="summary-grid">
-                <div className="summary-item">
-                  <span className="summary-value">12</span>
-                  <span className="summary-label">읽은 책</span>
+            alert("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+            logout();
+            navigate("/login");
+        } catch (err) {
+            console.error(err);
+            alert("비밀번호 변경 실패");
+        }
+    };
+
+    /* ✅ 계정 삭제 */
+    const handleDeleteAccount = async () => {
+        const ok = window.confirm("정말 계정을 삭제하시겠습니까?");
+        if (!ok) return;
+
+        try {
+            await axios.delete(`http://localhost:8080/profile/${userId}`);
+
+            alert("계정이 삭제되었습니다.");
+            logout();
+            navigate("/");
+        } catch (err) {
+            console.error(err);
+            alert("계정 삭제 실패");
+        }
+    };
+
+    return (
+        <div className="layout">
+            <Sidebar />
+
+            <main className="content">
+                <div className="profile-page">
+                    <header className="profile-header">
+                        <h1 className="profile-title">내 프로필</h1>
+                        <p className="profile-subtitle">
+                            나의 독서 정보와 계정 상태를 확인하세요.
+                        </p>
+                    </header>
+
+                    <section className="profile-column">
+                        {/* 프로필 카드 */}
+                        <div className="profile-card">
+                            <div className="profile-avatar">
+                                <span>{user.name[0]}</span>
+                            </div>
+
+                            <div className="profile-info">
+                                <h2 className="profile-name">{user.name}</h2>
+                                <p className="profile-date">가입 회원</p>
+                            </div>
+                        </div>
+
+                        {/* 계정 설정 */}
+                        <div className="account-card">
+                            <h3 className="account-title">계정 설정</h3>
+
+                            {/* ✅ 비밀번호 변경 */}
+                            <div className="account-buttons">
+                                <input
+                                    type="password"
+                                    placeholder="새 비밀번호"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                />
+                                <button
+                                    className="setting-btn"
+                                    onClick={handleChangePassword}
+                                    disabled={loading}
+                                >
+                                    🔒 비밀번호 변경
+                                </button>
+                            </div>
+
+                            {/* ✅ 계정 삭제 */}
+                            <div className="danger-group">
+                                <button
+                                    className="danger-btn"
+                                    onClick={handleDeleteAccount}
+                                >
+                                    🗑 계정 삭제
+                                </button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-                <div className="summary-item">
-                  <span className="summary-value">5</span>
-                  <span className="summary-label">찜한 책</span>
-                </div>
-                <div className="summary-item">
-                  <span className="summary-value">3</span>
-                  <span className="summary-label">리뷰</span>
-                </div>
-              </div>
-            </div>
-
-            {/* 3. 계정 설정 카드 */}
-            <div className="account-card">
-              <h3 className="account-title">계정 설정</h3>
-              <p className="account-desc">
-                닉네임과 비밀번호를 변경하거나, 계정을 삭제할 수 있습니다.
-              </p>
-
-              <div className="account-buttons">
-                <button className="setting-btn">
-                  <span className="btn-icon">📝</span>
-                  <span>닉네임 변경</span>
-                </button>
-
-                <button className="setting-btn">
-                  <span className="btn-icon">🔒</span>
-                  <span>비밀번호 변경</span>
-                </button>
-              </div>
-
-              <div className="danger-group">
-                <button className="danger-btn">
-                  <span className="btn-icon">🗑</span>
-                  <span>계정 삭제</span>
-                </button>
-              </div>
-            </div>
-          </section>
+            </main>
         </div>
-      </main>
-    </div>
-  );
+    );
 }
 
 export default ProfilePage;
