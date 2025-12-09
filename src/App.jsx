@@ -22,7 +22,6 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
       <Layout>
         <Routes>
           {/* 홈: 책 리스트 전달 */}
@@ -44,7 +43,6 @@ function App() {
           <Route path="/:bookId" element={<BookDetail />} />
         </Routes>
       </Layout>
-    </BrowserRouter>
   );
 }
 

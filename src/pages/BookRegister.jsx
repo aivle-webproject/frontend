@@ -1,17 +1,19 @@
 import "./BookRegister.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
 function BookRegister() {
     const navigate = useNavigate();
-    const { user } = useAuth(); // ✅ 로그인 유저
+    const { user } = useAuth();
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [category, setCategory] = useState("로맨스");
+    const [coverImage, setCoverImage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isGenerating, setIsGenerating] = useState(false);
 
 
     useEffect(() => {
@@ -24,7 +26,43 @@ function BookRegister() {
     // ✅ 아직 user를 못 받았을 땐 렌더링 중단
     if (!user) return null;
 
-    // ✅ 등록 버튼
+    // ✅ AI 표지 생성 함수
+    const generateImage = async () => {
+        if (!content) {
+            alert("소개를 입력해주세요.");
+            return;
+        }
+
+        setIsGenerating(true);
+        try {
+            const response = await axios.post(
+                "https://api.openai.com/v1/images/generations",
+                {
+                    model: "dall-e-3",
+                    prompt: `Create a book cover image for a ${category} book. Description: ${content}`,
+                    n: 1,
+                    size: "1024x1024",
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+                    },
+                }
+            );
+
+            if (response.data && response.data.data && response.data.data.length > 0) {
+                setCoverImage(response.data.data[0].url);
+            }
+        } catch (e) {
+            console.error(e);
+            alert("이미지 생성 실패");
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
+    // 등록 버튼
     const handleSubmit = async () => {
         try {
             await axios.post(
@@ -33,13 +71,16 @@ function BookRegister() {
                     title,
                     content,
                     category,
+                    coverImageUrl: coverImage, // 백엔드 필드명에 맞춤
                 }
             );
 
             navigate("/");
         } catch (e) {
             console.error(e);
-            alert("도서 등록 실패");
+            // 에러 메시지를 구체적으로 표시
+            const errorMessage = e.response?.data?.message || e.message || "도서 등록 실패";
+            alert(`도서 등록 실패: ${errorMessage}`);
         }
     };
 
@@ -81,6 +122,25 @@ function BookRegister() {
                     <option value="역사">역사</option>
                     <option value="시">시</option>
                 </select>
+            </div>
+
+            {/* ✅ AI 표지 생성 섹션 */}
+            <div className="form-group">
+                <label>AI 표지 생성</label>
+                <div className="ai-generation">
+                    <button
+                        className="generate-btn"
+                        onClick={generateImage}
+                        disabled={isGenerating || !content}
+                    >
+                        {isGenerating ? "생성 중..." : "AI 표지 생성"}
+                    </button>
+                    {coverImage && (
+                        <div className="generated-image">
+                            <img src={coverImage} alt="Generated Cover" style={{ maxWidth: "100%", marginTop: "10px" }} />
+                        </div>
+                    )}
+                </div>
             </div>
 
 
