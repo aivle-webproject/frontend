@@ -14,19 +14,38 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 
 function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [userId, setUserId] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: 로그인 API 연동 (userId, password 사용)
-    login({ id: userId, name: userId });
-    navigate("/");
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const res = await axios.post("http://localhost:8080/login", {
+                name,
+                password,
+            });
+
+            console.log("✅ login response:", res.data);
+
+            // ✅ 핵심 수정
+            login({
+                id: res.data.user.userId,
+                name: res.data.user.name,
+                gender: res.data.user.gender,
+            });
+
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert("로그인 실패");
+        }
+    };
 
   return (
     <AuthLayout>
@@ -59,8 +78,8 @@ function LoginPage() {
               required
               fullWidth
               margin="normal"
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
