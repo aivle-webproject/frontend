@@ -1,12 +1,36 @@
 import "./BookRegister.css";
-import {useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { generateBookCover } from "../api/openai";
 
 
 function BookRegister() {
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [category, setCategory] = useState("로맨스");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleRegister = async () => {
+        if (!title || !description) {
+            alert("제목과 소개를 모두 입력해주세요.");
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            const coverImageUrl = await generateBookCover({ title, description, category });
+            console.log("Generated Cover:", coverImageUrl);
+            alert("표지가 생성되었습니다! (콘솔 확인)");
+            // 여기서 실제 등록 로직을 수행하거나 navigate를 할 수 있습니다.
+            // navigate("/"); 
+        } catch (error) {
+            console.error(error);
+            alert("표지 생성 실패: " + error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     return (
         <div className="book-register">
             <h2 className="page-title">도서 등록</h2>
@@ -39,7 +63,7 @@ function BookRegister() {
 
             <div className="form-group">
                 <label>3. 작품의 카테고리를 선택해주세요.</label>
-                <select>
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option>로맨스</option>
                     <option>SF</option>
                     <option>공포</option>
@@ -56,7 +80,9 @@ function BookRegister() {
             </p>
 
             <div className="actions">
-                <button className="submit-btn">등록</button>
+                <button className="submit-btn" onClick={handleRegister} disabled={isLoading}>
+                    {isLoading ? "생성 중..." : "등록"}
+                </button>
                 <button
                     type="button"
                     className="cancel-btn"
