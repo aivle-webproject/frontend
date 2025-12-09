@@ -19,7 +19,6 @@ function EditBookModal({ book, onClose, onSave }) {
         <div className="modal-overlay">
             <div className="modal edit-book-modal">
                 <h2>도서 수정</h2>
-
                 <label className="modal-label">제목</label>
                 <input
                     type="text"
@@ -50,7 +49,6 @@ function EditBookModal({ book, onClose, onSave }) {
                     placeholder="내용"
                     rows={5}
                 />
-
                 <div className="modal-actions">
                     <button onClick={handleSave}>저장</button>
                     <button onClick={onClose}>닫기</button>
@@ -96,7 +94,8 @@ function BookDetail() {
                     )}
                 </div>
                 <div className="book-detail-dates">
-                    {/* 생성일 / 수정일 영역 (기존 코드 그대로) */}
+                    <p>등록날짜: {book.createdAt}</p>
+                    <p>수정날짜: {book.editedAt}</p>
                 </div>
             </div>
 
@@ -105,7 +104,6 @@ function BookDetail() {
                 <span className="book-detail-category">{book.category}</span>
                 <p className="book-detail-content">{book.content}</p>
             </div>
-
             <div className="book-detail-actions">
                 <button
                     className="edit-book-btn"
