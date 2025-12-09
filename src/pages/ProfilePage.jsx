@@ -11,7 +11,7 @@ function ProfilePage() {
 
       <main className="content">
         <div className="profile-page">
-          {/* 상단 헤더 */}
+          {/* 상단 헤더 - 왼쪽 상단 고정 */}
           <header className="profile-header">
             <h1 className="profile-title">내 프로필</h1>
             <p className="profile-subtitle">
@@ -19,7 +19,7 @@ function ProfilePage() {
             </p>
           </header>
 
-          {/* 한 줄 세로 레이아웃 */}
+          {/* 카드들을 세로로 한 줄 정렬 */}
           <section className="profile-column">
             {/* 1. 프로필 카드 */}
             <div className="profile-card">
@@ -29,7 +29,7 @@ function ProfilePage() {
 
               <div className="profile-info">
                 <h2 className="profile-name">임주혁</h2>
-                <p className="profile-email">example@email.com</p>
+                {/* 이메일은 프로필 카드에서 제거 */}
                 <p className="profile-date">가입일: 2025-01-01</p>
               </div>
             </div>
@@ -54,12 +54,31 @@ function ProfilePage() {
               </div>
             </div>
 
-            {/* 3. 계정 관련 카드 (비밀번호 변경 + 계정 삭제) */}
+            {/* 3. 계정 설정 카드 */}
             <div className="account-card">
-              <button className="setting-btn">이메일 변경</button>
-              <button className="setting-btn">닉네임 변경</button>
-              <button className="setting-btn">비밀번호 변경</button>
-              <button className="danger-btn">계정 삭제</button>
+              <h3 className="account-title">계정 설정</h3>
+              <p className="account-desc">
+                닉네임과 비밀번호를 변경하거나, 계정을 삭제할 수 있습니다.
+              </p>
+
+              <div className="account-buttons">
+                <button className="setting-btn">
+                  <span className="btn-icon">📝</span>
+                  <span>닉네임 변경</span>
+                </button>
+
+                <button className="setting-btn">
+                  <span className="btn-icon">🔒</span>
+                  <span>비밀번호 변경</span>
+                </button>
+              </div>
+
+              <div className="danger-group">
+                <button className="danger-btn">
+                  <span className="btn-icon">🗑</span>
+                  <span>계정 삭제</span>
+                </button>
+              </div>
             </div>
           </section>
         </div>
