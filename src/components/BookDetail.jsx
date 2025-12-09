@@ -1,6 +1,7 @@
 // src/pages/BookDetail.jsx
+import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../components/Sidebar";
 import "./BookDetail.css";
@@ -12,6 +13,7 @@ function EditBookModal({ book, onClose, onSave }) {
     const [category, setCategory] = useState(book.category);
     const [content, setContent] = useState(book.content);
 
+
     const handleSave = () => {
         onSave({
             ...book,
@@ -20,6 +22,7 @@ function EditBookModal({ book, onClose, onSave }) {
             content,
         });
     };
+
 
     return (
         <div className="modal-overlay">
@@ -57,6 +60,8 @@ function EditBookModal({ book, onClose, onSave }) {
 /* ================= 상세 페이지 ================= */
 function BookDetail() {
     const { bookId } = useParams();
+    const navigate = useNavigate();
+    const { user } = useAuth();
     const [book, setBook] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -79,6 +84,23 @@ function BookDetail() {
 
         fetchBook();
     }, [bookId]);
+
+    const handleDelete = async () => {
+        const confirmDelete = window.confirm("정말 이 도서를 삭제하시겠습니까?");
+        if (!confirmDelete) return;
+
+        try {
+            await axios.delete(
+                `http://localhost:8080/api/books/${bookId}`
+            );
+
+            alert("도서가 삭제되었습니다.");
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert("도서 삭제 실패");
+        }
+    };
 
     /* ✅ 수정 저장 */
     const handleSave = async (updatedBook) => {
@@ -151,6 +173,13 @@ function BookDetail() {
                             onClick={() => setShowEditModal(true)}
                         >
                             도서 수정
+                        </button>
+
+                        <button
+                            className="edit-book-btn"
+                            onClick={handleDelete}
+                        >
+                            도서 삭제
                         </button>
                     </div>
 
