@@ -14,20 +14,19 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 
 function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
- const basePath = import.meta.env.BASE_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, {
+            const res = await axios.post("/login", { // 수정
                 name,
                 password,
             });

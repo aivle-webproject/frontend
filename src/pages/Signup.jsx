@@ -14,7 +14,7 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 
 function SignupPage() {
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ function SignupPage() {
         }
 
         try {
-            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/signup`, {
+            await axios.post("/signup", { // 수정
                 name: name,
                 password: password,
                 gender: gender

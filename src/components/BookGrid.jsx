@@ -1,7 +1,7 @@
 import "./BookGrid.css";
 import { useEffect, useState } from "react";
 import BookCard from "./BookCard";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 
 function BookGrid() {
     const [books, setBooks] = useState([]);
@@ -10,7 +10,7 @@ function BookGrid() {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/books`);
+                const res = await axios.get("/api/books"); // 수정
                 setBooks(res.data);
             } catch (error) {
                 console.error(error);

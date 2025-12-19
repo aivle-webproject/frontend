@@ -1,7 +1,7 @@
 import "./BookRegister.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 import { useAuth } from "../context/AuthContext";
 
 function BookRegister() {
@@ -35,7 +35,8 @@ function BookRegister() {
 
         setIsGenerating(true);
         try {
-            const response = await axios.post(
+            // OpenAI API는 외부이므로 기본 axios 사용
+            const response = await import("axios").then(axios => axios.post(
                 "https://api.openai.com/v1/images/generations",
                 {
                     model: "dall-e-3",
@@ -49,7 +50,7 @@ function BookRegister() {
                         Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
                     },
                 }
-            );
+            ));
 
             if (response.data && response.data.data && response.data.data.length > 0) {
                 setCoverImage(response.data.data[0].url);
@@ -66,7 +67,7 @@ function BookRegister() {
     const handleSubmit = async () => {
         try {
             await axios.post(
-                `${import.meta.env.VITE_API_BASE_URL}/api/books/${user.id}`,
+                `/api/books/${user.id}`, // 수정
                 {
                     title,
                     content,
