@@ -21,12 +21,13 @@ function LoginPage() {
   const { login } = useAuth();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+ const basePath = import.meta.env.BASE_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8080/login", {
+            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, {
                 name,
                 password,
             });

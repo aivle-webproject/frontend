@@ -66,7 +66,7 @@ function BookRegister() {
     const handleSubmit = async () => {
         try {
             await axios.post(
-                `http://localhost:8080/api/books/${user.id}`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/books/${user.id}`,
                 {
                     title,
                     content,

@@ -34,7 +34,7 @@ function SignupPage() {
         }
 
         try {
-            await axios.post("http://localhost:8080/signup", {
+            await axios.post(`${import.meta.env.VITE_API_BASE_URL}/signup`, {
                 name: name,
                 password: password,
                 gender: gender
