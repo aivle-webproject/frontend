@@ -14,7 +14,7 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import AuthLayout from "./AuthLayout";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function LoginPage() {
         e.preventDefault();
 
         try {
-            const res = await axios.post("http://localhost:8080/login", {
+            const res = await axios.post("/login", { // 수정
                 name,
                 password,
             });

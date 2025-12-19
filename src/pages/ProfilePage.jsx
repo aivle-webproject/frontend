@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useAuth } from "../context/AuthContext";
-import axios from "axios";
+import axios from "../api/axios";
 import "../App.css";
 import "./ProfilePage.css";
 import {useNavigate} from "react-router-dom";
@@ -21,7 +21,7 @@ function ProfilePage() {
         if (!newPassword) return alert("비밀번호 입력");
 
         try {
-            await axios.patch(`http://localhost:8080/profile/${userId}/password`, {
+            await axios.patch(`/profile/${userId}/password`, {
                 newPassword
                 }
             );
@@ -41,7 +41,7 @@ function ProfilePage() {
         if (!ok) return;
 
         try {
-            await axios.delete(`http://localhost:8080/profile/${userId}`);
+            await axios.delete(`/profile/${userId}`);
 
             alert("계정이 삭제되었습니다.");
             logout();

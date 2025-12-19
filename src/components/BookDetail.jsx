@@ -2,7 +2,7 @@
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../api/axios"; // 수정
 import Sidebar from "../components/Sidebar";
 import "./BookDetail.css";
 import "./Modal.css";
@@ -71,7 +71,7 @@ function BookDetail() {
         const fetchBook = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:8080/api/books/${bookId}`
+                    `/api/books/${bookId}` // 수정
                 );
                 setBook(res.data);
             } catch (error) {
@@ -91,7 +91,7 @@ function BookDetail() {
 
         try {
             await axios.delete(
-                `http://localhost:8080/api/books/${bookId}`
+                `/api/books/${bookId}` // 수정
             );
 
             alert("도서가 삭제되었습니다.");
@@ -106,7 +106,7 @@ function BookDetail() {
     const handleSave = async (updatedBook) => {
         try {
             const res = await axios.put(
-                `http://localhost:8080/api/books/${bookId}`,
+                `/api/books/${bookId}`, // 수정
                 updatedBook
             );
             setBook(res.data);        // 화면 즉시 반영
