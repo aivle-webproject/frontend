@@ -17,8 +17,6 @@ phases:
       - npm run build
       - pwd
       - ls -al
-      - ls -al build || true
-      - ls -al dist || true
 
 artifacts:
   base-directory: dist
