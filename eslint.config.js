@@ -9,7 +9,11 @@ export default [
         files: ['**/*.{js,jsx}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser,
+            // 수정된 부분: browser와 node를 모두 추가합니다.
+            globals: {
+                ...globals.browser,
+                ...globals.node  // <--- 이 줄이 process를 인식하게 해줍니다.
+            },
             parserOptions: {
                 ecmaVersion: 'latest',
                 ecmaFeatures: { jsx: true },
